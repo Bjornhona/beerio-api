@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-// const favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -26,18 +26,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 
 const app = express();
+const port = process.env.PORT || 5000;
 
-// app.use(favicon(__dirname + '/public/favicon.ico'));
-// app.get('/', (req, res) => res.status(204));
-// app.get('/favicon.ico', (req, res) => res.status(204));
-function ignoreFavicon(req, res, next) {
-  if (req.originalUrl.includes('favicon.ico')) {
-    res.status(204).end()
-  }
-  next();
-}
+app.get('/', (req, res) => {
+  res.send({ express: 'Hello From Express' });
+});
 
-app.use(ignoreFavicon);
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
@@ -61,7 +57,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
 app.use('/beers', beers);
