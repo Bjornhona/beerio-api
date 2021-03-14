@@ -28,6 +28,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
+app.get('/', (req, res) => res.status(204));
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+
 
 app.use(cors({
   credentials: true,
