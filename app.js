@@ -17,7 +17,7 @@ const beers = require('./routes/beers');
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
-  reconnectTries: Number.MAX_VALUE,
+  // reconnectTries: Number.MAX_VALUE,
   useUnifiedTopology: true
 }).then(() => {
   console.log(`Connected to database`);
@@ -27,9 +27,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const app = express();
 
-app.use(favicon(__dirname + 'public/favicon.ico'));
-app.get('/favicon.ico', (req, res) => res.status(204));
-// app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.use(favicon(__dirname + '/build/favicon.ico'));
 
 app.use(cors({
@@ -42,7 +40,7 @@ app.use(session({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   }),
-  secret: 'beeriodb',
+  secret: 'some-string',
   resave: true,
   saveUninitialized: true,
   cookie: {
@@ -54,7 +52,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
 app.use('/beers', beers);
