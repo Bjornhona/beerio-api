@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const favicon = require('beerio-icon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -25,6 +26,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 
 const app = express();
+
+app.use(favicon(__dirname + '/favicon.ico'));
+app.get('/favicon.ico', (req, res) => res.status(204));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/build/favicon.ico'));
 
 app.use(cors({
   credentials: true,
