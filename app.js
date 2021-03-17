@@ -29,7 +29,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  res.send({ express: 'Hello From Express' });
+  res.send({ express: 'Hello From Beerio API!' });
 });
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -37,7 +37,8 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN]
+  origin: [process.env.PUBLIC_DOMAIN],
+  headers: {"Access-Control-Allow-Origin": "*"}
 }));
 
 app.use(session({
