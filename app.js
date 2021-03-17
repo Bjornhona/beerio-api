@@ -38,23 +38,23 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
-  header: {"Access-Control-Allow-Origin": "*"}
+  // header: {"Access-Control-Allow-Origin": "*"}
 }));
 
-app.use((req, res, next) => {
-  // res.setHeader('Access-Control-Allow-Origin', process.env.PUBLIC_DOMAIN);
-  // res.setHeader('Access-Control-Allow-Credentials', 'true');
-  // res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-  // res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, access-control-allow-origin');
+// app.use((req, res, next) => {
+//   // res.setHeader('Access-Control-Allow-Origin', process.env.PUBLIC_DOMAIN);
+//   // res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   // res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+//   // res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, access-control-allow-origin');
   
-  console.log(res);
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader(
-  //   "Access-Control-Allow-Headers",
-  //   "Origin, X-Requested-With, Content-Type, Accept"
-  // );
-  next();
-});
+//   console.log(res);
+//   // res.setHeader("Access-Control-Allow-Origin", "*");
+//   // res.setHeader(
+//   //   "Access-Control-Allow-Headers",
+//   //   "Origin, X-Requested-With, Content-Type, Accept"
+//   // );
+//   next();
+// });
 
 app.use(session({
   store: new MongoStore({
