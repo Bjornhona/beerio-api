@@ -37,7 +37,8 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN]
+  origin: [process.env.PUBLIC_DOMAIN],
+  header: {"Access-Control-Allow-Origin": "*"}
 }));
 
 app.use((req, res, next) => {
