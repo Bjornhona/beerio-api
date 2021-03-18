@@ -44,7 +44,7 @@ app.use(cors({
   // preflightContinue: false,
   headers: {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin, Accept, Content-Type"
+    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Origin, Accept, Content-Type"
   }
 }));
 
