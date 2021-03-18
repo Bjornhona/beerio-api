@@ -37,15 +37,18 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN],
-  // origin: true,
+  // origin: [process.env.PUBLIC_DOMAIN],
+  origin: true,
   // optionsSuccessStatus: 204,
   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   // preflightContinue: false,
-  // headers: {"Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin, Accept, Content-Type"}
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin, Accept, Content-Type"
+  }
 }));
 
-app.options('*', cors());
+// app.options('*', cors());
 //   // origin: true,
 //   // credentials: false,
 //   methods: ["GET","PUT","POST","DELETE"],
