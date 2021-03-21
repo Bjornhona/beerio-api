@@ -49,9 +49,11 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
-}));
+}), function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+});
 
-app.options("*", cors());
+// app.options("https://beerio-aa491.web.app/", cors());
 
 app.use(session({
   store: new MongoStore({
