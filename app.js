@@ -44,18 +44,11 @@ app.use(cors({
   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   // preflightContinue: false,
   headers: {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers. Origin, Accept"
     // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Origin, Accept, Content-Type"
     // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin"
   }
 }));
-
-// app.options('*', cors());
-//   // origin: true,
-//   // credentials: false,
-//   methods: ["GET","PUT","POST","DELETE"],
-//   maxAge: 3600
-// ));
 
 app.use(session({
   store: new MongoStore({
