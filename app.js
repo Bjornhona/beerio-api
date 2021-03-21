@@ -36,7 +36,7 @@ app.all('/', function(req, res, next) {
 //   }
 //   // res.header("Access-Control-Allow-Origin", "*");
 // //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept");
-  res.header("Access-Control-Allow-Origin", "https://beerio-api-eu.herokuapp.com");
+  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app/");
   res.header("Access-Control-Allow-Headers", "Origin");
   next();
 });
