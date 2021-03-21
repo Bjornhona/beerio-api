@@ -85,6 +85,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  console.log(res);
   // always log the error
   console.error('ERROR', req.method, req.path, err);
 
