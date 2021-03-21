@@ -47,7 +47,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
-  credentials: true,
+  // credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
 }));
 
