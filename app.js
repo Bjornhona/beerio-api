@@ -34,6 +34,11 @@ app.all('/', function(req, res, next) {
   next();
 });
 
+app.use(cors({
+  credentials: true,
+  origin: [process.env.PUBLIC_DOMAIN],
+}));
+
 app.get('/', (req, res) => {
   res.send({ express: 'Hello From Beerio API!' });
 });
@@ -41,10 +46,10 @@ app.get('/', (req, res) => {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.use(cors({
-  credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN],
-}));
+// app.use(cors({
+//   credentials: true,
+//   origin: [process.env.PUBLIC_DOMAIN],
+// }));
 
 app.use(session({
   store: new MongoStore({
