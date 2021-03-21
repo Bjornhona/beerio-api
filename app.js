@@ -30,7 +30,9 @@ const port = process.env.PORT || 5000;
 
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  // res.header("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
+  // res.header("Access-Control-Allow-Headers", "Authorization, Lang");
+  res.header("Access-Control-Allow-Headers", "Authorization, X-Requested-With");
   next();
 });
 
@@ -45,10 +47,6 @@ app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
 }));
-
-// Then pass them to cors:
-// app.use(cors(corsOptions));
-// app.use(cors()); 
 
 app.use(session({
   store: new MongoStore({
