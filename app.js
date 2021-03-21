@@ -28,12 +28,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
-
 app.get('/', (req, res) => {
   res.send({ express: 'Hello From Beerio API!' });
 });
@@ -45,6 +39,12 @@ app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
 }));
+
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.use(session({
   store: new MongoStore({
