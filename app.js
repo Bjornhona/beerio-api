@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.all('/', function(req, res, next) {
+app.all('/auth/me', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   // res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
@@ -41,28 +41,13 @@ app.get('/', (req, res) => {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// app.use(cors({
-//   credentials: true,
-//   origin: [process.env.PUBLIC_DOMAIN],
-//   optionsSuccessStatus: 200
-// }));
-
-var whitelist = ['https://beerio-aa491.web.app', 'https://beerio-aa491.firebaseapp.com']
-var corsOptions = {
+app.use(cors({
   credentials: true,
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+  origin: [process.env.PUBLIC_DOMAIN],
+}));
 
 // Then pass them to cors:
 app.use(cors(corsOptions));
-
-
 
 app.use(session({
   store: new MongoStore({
