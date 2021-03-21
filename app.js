@@ -29,7 +29,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app");
+  res.header("Access-Control-Allow-Origin", "*");
   // res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
@@ -44,20 +44,8 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
-  // origin: true,
-  // origin: "*",
-  optionsSuccessStatus: 200,
-  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  // preflightContinue: false,
-  // headers: {
-  //   "Access-Control-Allow-Origin": [process.env.PUBLIC_DOMAIN],
-  //   "Access-Control-Allow-Headers": "Access-Control-Allow-Headers. Origin, Accept"
-    // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Origin, Accept, Content-Type"
-    // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin"
-  // }
+  optionsSuccessStatus: 200
 }));
-
-// app.options('*', cors());
 
 app.use(session({
   store: new MongoStore({
