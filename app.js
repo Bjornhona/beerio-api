@@ -41,11 +41,28 @@ app.get('/', (req, res) => {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.use(cors({
+// app.use(cors({
+//   credentials: true,
+//   origin: [process.env.PUBLIC_DOMAIN],
+//   optionsSuccessStatus: 200
+// }));
+
+var whitelist = ['https://beerio-aa491.web.app', 'https://beerio-aa491.firebaseapp.com']
+var corsOptions = {
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN],
-  optionsSuccessStatus: 200
-}));
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+// Then pass them to cors:
+app.use(cors(corsOptions));
+
+
 
 app.use(session({
   store: new MongoStore({
