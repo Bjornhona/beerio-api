@@ -39,7 +39,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN],
 }));
 
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
   res.send({ express: 'Hello From Beerio API!' });
 });
 
@@ -70,7 +70,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/auth', auth);
+app.use('/auth', cors(), auth);
 app.use('/beers', beers);
 
 // catch 404 and forward to error handler
