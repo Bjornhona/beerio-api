@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 const port = process.env.PORT || 5000;
 
-// app.all('/', function(req, res, next) {
+app.all('/', function(req, res, next) {
 //   const allowedOrigins = ["https://beerio-aa491.web.app/", "https://beerio-api-eu.herokuapp.com/"];
 //   let origin = req.headers.origin;
 //   if (allowedOrigins.includes(origin)) {
@@ -36,7 +36,9 @@ const port = process.env.PORT || 5000;
 //   }
 //   // res.header("Access-Control-Allow-Origin", "*");
 // //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept");
-//   next();
+  res.header("Access-Control-Allow-Origin", "https://beerio-api-eu.herokuapp.com");
+  res.header("Access-Control-Allow-Headers", "Origin");
+  next();
 // });
 
 app.get('/', (req, res) => {
@@ -49,10 +51,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
-}), function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin");
-});
+}));
 
 // app.options("https://beerio-aa491.web.app/", cors());
 
