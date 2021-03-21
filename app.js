@@ -28,16 +28,16 @@ mongoose.connect(process.env.MONGODB_URI, {
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.all('/', function(req, res, next) {
-  const allowedOrigins = ["https://beerio-aa491.web.app/", "https://beerio-api-eu.herokuapp.com/"];
-  let origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-  // res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept");
-  next();
-});
+// app.all('/', function(req, res, next) {
+//   const allowedOrigins = ["https://beerio-aa491.web.app/", "https://beerio-api-eu.herokuapp.com/"];
+//   let origin = req.headers.origin;
+//   if (allowedOrigins.includes(origin)) {
+//     res.header("Access-Control-Allow-Origin", origin);
+//   }
+//   // res.header("Access-Control-Allow-Origin", "*");
+// //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept");
+//   next();
+// });
 
 app.get('/', (req, res) => {
   res.send({ express: 'Hello From Beerio API!' });
@@ -50,6 +50,8 @@ app.use(cors({
   credentials: true,
   origin: [process.env.PUBLIC_DOMAIN],
 }));
+
+app.options("https://beerio-aa491.web.app", cors());
 
 app.use(session({
   store: new MongoStore({
