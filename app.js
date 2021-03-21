@@ -29,19 +29,17 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.all('/', function(req, res, next) {
-//   const allowedOrigins = ["https://beerio-aa491.web.app/", "https://beerio-api-eu.herokuapp.com/"];
-//   let origin = req.headers.origin;
-//   if (allowedOrigins.includes(origin)) {
-//     res.header("Access-Control-Allow-Origin", origin);
-//   }
-//   // res.header("Access-Control-Allow-Origin", "*");
-// //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept");
-  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app/");
-  res.header("Access-Control-Allow-Headers", "Origin");
+  const allowedOrigins = ["https://beerio-aa491.web.app/", "https://beerio-api-eu.herokuapp.com/"];
+  let origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With");
   next();
 });
 
 app.get('/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "true");
   res.send({ express: 'Hello From Beerio API!' });
 });
 
