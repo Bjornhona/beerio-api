@@ -29,7 +29,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  console.log(res);
   res.send({ express: 'Hello From Beerio API!' });
 });
 
