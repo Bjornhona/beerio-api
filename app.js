@@ -39,7 +39,7 @@ app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://beerio-api-eu.herokuapp.com");
   res.header("Access-Control-Allow-Headers", "Origin");
   next();
-// });
+});
 
 app.get('/', (req, res) => {
   res.send({ express: 'Hello From Beerio API!' });
