@@ -29,6 +29,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
+  console.log(res);
   res.send({ express: 'Hello From Beerio API!' });
 });
 
@@ -85,7 +86,6 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(res);
   // always log the error
   console.error('ERROR', req.method, req.path, err);
 
