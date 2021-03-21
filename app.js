@@ -30,9 +30,7 @@ const port = process.env.PORT || 5000;
 
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE");
-  // res.header("Access-Control-Allow-Headers", "Authorization, Lang");
-  res.header("Access-Control-Allow-Headers", "Authorization, X-Requested-With");
+  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
 
