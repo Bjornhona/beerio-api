@@ -51,6 +51,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN],
 }), function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin");
 });
 
 // app.options("https://beerio-aa491.web.app/", cors());
