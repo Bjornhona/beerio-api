@@ -48,16 +48,13 @@ app.get('/', (req, res) => {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// app.use(cors());
 app.use(cors({
-  // credentials: true,
+  credentials: true,
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
 // app.options([process.env.PUBLIC_DOMAIN], cors());
-app.options('*', cors({
-  origin: [process.env.PUBLIC_DOMAIN]
-}));
+// app.options('*', cors());
 
 app.use(session({
   store: new MongoStore({
