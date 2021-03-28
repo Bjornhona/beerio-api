@@ -35,7 +35,7 @@ const app = express();
   // }
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With");
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", [process.env.PUBLIC_DOMAIN]);
   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -53,7 +53,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
-// app.options([process.env.PUBLIC_DOMAIN], cors());
+app.options([process.env.PUBLIC_DOMAIN], cors());
 // app.options('*', cors());
 
 app.use(session({
