@@ -50,11 +50,11 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
-  origin: "https://beerio-aa491.web.app"
+  origin: "https://beerio-aa491.web.app/"
 }));
 // origin: [process.env.PUBLIC_DOMAIN]
 
-app.options("https://beerio-aa491.web.app", cors());
+app.options("https://beerio-aa491.web.app/", cors());
 // app.options('*', cors());
 
 app.use(session({
