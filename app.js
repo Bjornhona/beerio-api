@@ -35,7 +35,7 @@ const app = express();
   // }
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With");
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app/");
+  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app");
   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -53,7 +53,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
-app.options("https://beerio-aa491.web.app/", cors());
+app.options("https://beerio-aa491.web.app", cors());
 // app.options('*', cors());
 
 app.use(session({
