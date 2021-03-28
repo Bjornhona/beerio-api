@@ -17,7 +17,7 @@ const beers = require('./routes/beers');
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
-  reconnectTries: Number.MAX_VALUE,
+  // reconnectTries: Number.MAX_VALUE,
   useUnifiedTopology: true
 }).then(() => {
   console.log(`Connected to database`);
