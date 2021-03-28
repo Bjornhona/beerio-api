@@ -17,7 +17,7 @@ const beers = require('./routes/beers');
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
-  // reconnectTries: Number.MAX_VALUE,
+  reconnectTries: Number.MAX_VALUE,
   useUnifiedTopology: true
 }).then(() => {
   console.log(`Connected to database`);
@@ -57,7 +57,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
-app.options("https://beerio-aa491.web.app", cors());
+// app.options("https://beerio-aa491.web.app", cors());
 // app.options('*', cors());
 
 app.use(session({
@@ -83,6 +83,10 @@ app.use('/auth', auth);
 app.use('/beers', beers);
 
 // app.listen(port, () => console.log(`listening on ${port}`));
+var server = app.listen(process.env.PORT || 5000, function () {
+  var port = server.address().port;
+  console.log("Express is working on port " + port);
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
