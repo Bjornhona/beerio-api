@@ -53,7 +53,7 @@ app.use(cors({
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
-app.options([process.env.PUBLIC_DOMAIN], cors());
+app.options("https://beerio-aa491.web.app/", cors());
 // app.options('*', cors());
 
 app.use(session({
