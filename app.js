@@ -34,11 +34,11 @@ const app = express();
   //   res.header("Access-Control-Allow-Origin", origin);
   // }
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With");
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 // res.header("Access-Control-Allow-Origin", "true");
 app.get('/', (req, res) => {
@@ -49,7 +49,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
-  credentials: [process.env.PUBLIC_DOMAIN],
+  credentials: true,
   origin: [process.env.PUBLIC_DOMAIN]
 }));
 
