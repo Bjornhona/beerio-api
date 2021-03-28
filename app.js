@@ -34,11 +34,11 @@ const app = express();
   //   res.header("Access-Control-Allow-Origin", origin);
   // }
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With");
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app");
-//   res.header("Access-Control-Allow-Methods", GET, POST, PUT, DELETE, OPTIONS);
-//   next();
-// });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://beerio-aa491.web.app");
+  res.header("Access-Control-Allow-Methods", GET, POST, PUT, DELETE, OPTIONS);
+  next();
+});
   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
 
@@ -52,8 +52,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(cors({
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN],
-  header: "https://beerio-aa491.web.app"
+  origin: [process.env.PUBLIC_DOMAIN]
 }));
 
 app.options("https://beerio-aa491.web.app", cors());
