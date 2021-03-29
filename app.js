@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -14,7 +15,10 @@ require('dotenv').config();
 const auth = require('./routes/auth');
 const beers = require('./routes/beers');
 
-mongoose.connect(process.env.MONGODB_URI, {
+let dbUser = fs.readFileSync(process.env.DB_USER);
+let dbPassword = fs.readFileSync(process.env.DB_PASSWORD);
+
+mongoose.connect(`mongodb://${dbUser}:${dbPassword}@beeriodb.rgrhh.mongodb.net/${process.env.DB_NAME}`, {
   keepAlive: true,
   useNewUrlParser: true,
   // reconnectTries: Number.MAX_VALUE,
