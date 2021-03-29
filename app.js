@@ -82,12 +82,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', auth);
 app.use('/beers', beers);
 
-// app.listen(port, () => console.log(`listening on ${port}`));
-// var server = app.listen(process.env.PORT || 5000, function () {
-//   var port = server.address().port;
-//   console.log("Express is working on port " + port);
-// });
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404).json({ code: 'not found' });
