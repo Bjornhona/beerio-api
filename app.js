@@ -51,7 +51,13 @@ app.get('/', (req, res) => {
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// credentials: true,
+// var privateKey = fs.readFileSync(__dirname + '/ssl/server.key').toString();
+// var certificate = fs.readFileSync(__dirname + '/ssl/gandiSSL.pem').toString();
+
+// var options = {
+//   key: privateKey,
+//   cert: certificate
+// };
 
 app.use(cors({
   credentials: true,
