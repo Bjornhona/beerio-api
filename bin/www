@@ -28,9 +28,9 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-// server.timeout = 25 * 1000;
-// server.keepAliveTimeout = 70 * 1000;
-// server.headersTimeout = 120 * 1000;
+server.timeout = 25 * 1000;
+server.keepAliveTimeout = 70 * 1000;
+server.headersTimeout = 120 * 1000;
 
 /**
  * Normalize a port into a number, string, or false.
