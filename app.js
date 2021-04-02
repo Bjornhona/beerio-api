@@ -45,7 +45,7 @@ const app = express();
 
 // res.header("Access-Control-Allow-Origin", "true");
 app.get('/', (req, res) => {
-  res.send({ express: 'Hello From Beerio API!' });
+  return res.send({ express: 'Hello From Beerio API!' });
 });
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -85,7 +85,7 @@ app.use('/beers', beers);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  res.status(404).json({ code: 'not found' });
+  return res.status(404).json({ code: 'not found' });
 });
 
 app.use((err, req, res, next) => {
@@ -94,7 +94,7 @@ app.use((err, req, res, next) => {
 
   // only render if the error ocurred before sending the response
   if (!res.headersSent) {
-    res.status(500).json({ code: 'unexpected' });
+    return res.status(500).json({ code: 'unexpected' });
   }
 });
 
