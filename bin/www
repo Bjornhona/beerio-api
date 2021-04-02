@@ -6,9 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('api-auth:server');
-var fs = require('fs');
-// var http = require('http');
-var https = require('https');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -18,22 +16,10 @@ var port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 /**
- * Set https credentials as options.
+ * Create HTTP server.
  */
 
-var privateKey = fs.readFileSync(__dirname + '/ssl/server.key').toString();
-var certificate = fs.readFileSync(__dirname + '/ssl/gandiSSL.pem').toString();
-
-var options = {
-  key: privateKey,
-  cert: certificate
-};
-
-/**
- * Create HTTPS server.
- */
-
-var server = https.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
