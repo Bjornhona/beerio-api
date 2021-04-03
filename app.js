@@ -44,6 +44,9 @@ const app = express();
 
 
 // res.header("Access-Control-Allow-Origin", "true");
+// app.get('/', (req, res) => {
+//   return res.send({ express: 'Hello From Beerio API!' });
+// });
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.get('/favicon.ico', (req, res) => res.status(204));
@@ -74,19 +77,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res) => {
-  return res.send({ express: 'Hello From Beerio API!' });
-});
-// app.post('/', function(req, res, next) {
-//   let data = req.body;
-// //   let data = {
-// //     response: 'You sent: ' + req.body.message
-// // };
-//   // Do something, like query a database or save data
-//   res.status(200).send(data);
-// });
-// app.use('/', express.static('html'));
 
 app.use('/auth', auth);
 app.use('/beers', beers);
