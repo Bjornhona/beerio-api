@@ -44,9 +44,9 @@ const app = express();
 
 
 // res.header("Access-Control-Allow-Origin", "true");
-// app.get('/', (req, res) => {
-//   return res.send({ express: 'Hello From Beerio API!' });
-// });
+app.get('/', (req, res) => {
+  return res.send({ express: 'Hello From Beerio API!' });
+});
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.get('/favicon.ico', (req, res) => res.status(204));
