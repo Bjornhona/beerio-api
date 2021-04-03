@@ -6,15 +6,6 @@ const User = require('../models/user');
 
 const { isLoggedIn } = require('../helpers/middlewares');
 
-// router.get('/', req, res, next) => {
-//   return res.status(200).json({
-//     Beerio API: Up and running!
-//   })
-// }
-router.get('/', (req, res) => {
-  return res.send({ express: 'Hello From Beerio API!' });
-});
-
 router.get('/me', (req, res, next) => {
   if (req.session.currentUser) {
     return res.json(req.session.currentUser);
