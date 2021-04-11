@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
 const axios = require('axios');
 const User = require('../models/user');
+
+// For example, some of the endpoints for our database are beers, breweries, events, hops, and locations.
 
 router.get('/', (req, res, next) => {
   axios.get('https://api.brewerydb.com/v2/beers/?key=1ff4f5a771c204dd18912e145d2e13ac')
     .then((result) => {
-      result = result.data.data.filter((item) => {
+      response = result.data.data.filter((item) => {
         return item.hasOwnProperty("labels");
       })
-      return res.json(result)
+      return res.json(response)
     })
     .catch((error) => {
       next(error);
@@ -30,13 +31,13 @@ router.get('/favorites', (req, res, next) => {
 })
 
 router.get('/breweries', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/breweries/?withLocations=Y&key=1ff4f5a771c204dd18912e145d2e13ac')
+  axios.get('https://api.brewerydb.com/v2/breweries/?withLocations=Y&isInBusiness=Y&key=1ff4f5a771c204dd18912e145d2e13ac')
   .then(result => {
-    const data = result.data.data;
-    return res.json(data);
+    const response = result.data.data;
+    return res.json(response);
   })
   .catch(next);
-})
+});
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
@@ -48,7 +49,27 @@ router.get('/:id', (req, res, next) => {
     .catch((error) => {
       next(error);
     })
-})
+});
+
+router.get('/brewery/:breweryId/locations', (req, res, next) => {
+  const breweryId = req.params.breweryId;
+  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/locations/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    const data = result.data.data;
+    return res.json(data);
+  })
+  .catch(next);
+});
+
+router.get('/locations/:zipCode', (req, res, next) => {
+  const zipCode = req.params.zipCode;
+  axios.get(`https://api.brewerydb.com/v2/locations/?zip-code=${zipCode}&key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    const response = result.data.data;
+    return res.json(response);
+  })
+  .catch(next);
+});
 
 router.put('/', (req, res, next) => {
   const { id, name, isOrganic, icon, style } = req.body;
