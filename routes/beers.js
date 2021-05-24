@@ -18,6 +18,17 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.get('/search/:query', (req, res, next) => {
+  const query = req.params.query;
+
+  axios.get(`/https://api.brewerydb.com/v2/search?q=${query}&type=beer&key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    response = result.data
+    return res.json(response);
+  })
+  .catch(error => next(error));
+})
+
 router.get('/favorites', (req, res, next) => {
   const userId = req.session.currentUser._id;
 
