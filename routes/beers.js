@@ -24,7 +24,8 @@ router.get('/search/:query', (req, res, next) => {
   axios.get(`/https://api.brewerydb.com/v2/search/?q=${query}&type=beer&key=1ff4f5a771c204dd18912e145d2e13ac`)
   .then(result => {
     response = result.data
-    return res.json(response);
+    // return res.json(response);
+    return result;
   })
   .catch(error => next(error));
 })
