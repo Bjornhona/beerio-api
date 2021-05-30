@@ -26,7 +26,7 @@ router.get('/search/:query', (req, res, next) => {
       const response = result.data.data.filter((item) => {
         return item.hasOwnProperty("labels");
       });
-      return res.status(200).json(response);
+      return result.totalResults !== 0 && res.status(200).json(response);
     })
     .catch(error => next(error));
 })
