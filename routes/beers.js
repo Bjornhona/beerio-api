@@ -22,13 +22,13 @@ router.get('/search/:query', (req, res, next) => {
   const query = req.params.query;
 
   axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=beer&key=1ff4f5a771c204dd18912e145d2e13ac`)
-  .then(result => {
-    const response = result.data.data.filter((item) => {
-      return item.hasOwnProperty("labels");
+    .then(result => {
+      const response = result.data.data.filter((item) => {
+        return item.hasOwnProperty("labels");
+      });
+      return res.status(200).json(response);
     })
-    return res.json(response);
-  })
-  .catch(error => next(error));
+    .catch(error => next(error));
 })
 
 router.get('/favorites', (req, res, next) => {
