@@ -18,10 +18,10 @@ router.get('/', (req, res, next) => {
     })
 })
 
-router.get('/search/:query', (req, res, next) => {
+router.get('/search/:type/:query', (req, res, next) => {
   const query = req.params.query;
 
-  axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=beer&key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=${type}&key=1ff4f5a771c204dd18912e145d2e13ac`)
     .then(result => {
       const response = result.data.data && result.data.data.filter((item) => {
         return item.hasOwnProperty("labels");
@@ -49,6 +49,17 @@ router.get('/breweries', (req, res, next) => {
   })
   .catch(next);
 });
+
+// router.get('/breweries/:breweryName', (req, res, next) => {
+//   const breweryName = req.params.breweryName;
+//   axios.get(`https://api.brewerydb.com/v2/breweries?name=${breweryName}&key=1ff4f5a771c204dd18912e145d2e13ac
+//   `)
+//   .then(result => {
+//     const response = result.data.data;
+//     return res.json(response);
+//   })
+//   .catch(next);
+// });
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
