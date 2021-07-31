@@ -29,9 +29,9 @@ router.get('/search/:type/:query', (req, res, next) => {
         response = result.data.data && result.data.data.filter((item) => {
           return item.hasOwnProperty("labels");
         });
-    } else {
-      response = result.data;
-    }
+      } else {
+        response = result && result;
+      }
       return res.status(200).json(response);
     })
     .catch(error => next(error));
