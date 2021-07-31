@@ -20,6 +20,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/search/:type/:query', (req, res, next) => {
   const query = req.params.query;
+  const type = req.params.type;
 
   axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=${type}&key=1ff4f5a771c204dd18912e145d2e13ac`)
     .then(result => {
