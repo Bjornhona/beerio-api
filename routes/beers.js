@@ -30,7 +30,7 @@ router.get('/search/:type/:query', (req, res, next) => {
           return item.hasOwnProperty("labels");
         });
     } else {
-      response = result.data.data;
+      response = result.data;
     }
       return res.status(200).json(response);
     })
