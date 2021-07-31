@@ -24,9 +24,14 @@ router.get('/search/:type/:query', (req, res, next) => {
 
   axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=${type}&key=1ff4f5a771c204dd18912e145d2e13ac`)
     .then(result => {
-      const response = result.data.data && result.data.data.filter((item) => {
-        return item.hasOwnProperty("labels");
-      });
+      let response;
+      if (type = "beer") {
+        response = result.data.data && result.data.data.filter((item) => {
+          return item.hasOwnProperty("labels");
+        });
+    } else {
+      response = result;
+    }
       return res.status(200).json(response);
     })
     .catch(error => next(error));
