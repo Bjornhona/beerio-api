@@ -4,16 +4,9 @@ const axios = require('axios');
 const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/beers/?key=1ff4f5a771c204dd18912e145d2e13ac')
-    .then((result) => {
-      response = result.data.data.filter((item) => {
-        return item.hasOwnProperty("labels");
-      })
-      return res.json(response)
-    })
-    .catch((error) => {
-      next(error);
-    })
+  axios.get('https://api.brewerydb.com/v2/beers/?hasLabels=Y&key=1ff4f5a771c204dd18912e145d2e13ac')
+    .then((result) => res.json(result.data.data))
+    .catch((error) => next(error));
 })
 
 router.get('/search/:type/:query', (req, res, next) => {
