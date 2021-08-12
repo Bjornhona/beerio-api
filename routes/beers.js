@@ -59,6 +59,24 @@ router.get('/breweries', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/styles', (req, res, next) => {
+  axios.get(`https://api.brewerydb.com/v2/styles/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    const response = result.data.data && result.data.data;
+    return res.json(response);
+  })
+  .catch(next);
+})
+
+router.get('/glassware', (req, res, next) => {
+  axios.get(`https://api.brewerydb.com/v2/glassware?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    const response = result.data.data && result.data.data;
+    return res.json(response);
+  })
+  .catch(next);
+})
+
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   axios.get(`https://api.brewerydb.com/v2/beer/${id}?key=1ff4f5a771c204dd18912e145d2e13ac`)
@@ -69,6 +87,16 @@ router.get('/:id', (req, res, next) => {
     .catch((error) => {
       next(error);
     })
+});
+
+router.get('/brewery/:breweryId', (req, res, next) => {
+  const breweryId = req.params.breweryId;
+  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  .then(result => {
+    const data = result.data.data;
+    return res.json(data);
+  })
+  .catch(next);
 });
 
 router.get('/brewery/:breweryId/locations', (req, res, next) => {
