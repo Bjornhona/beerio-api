@@ -75,13 +75,6 @@ router.get('/glassware', (req, res, next) => {
   .catch(next);
 })
 
-router.get('beers/foodPairings', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/beers/?foodPairings&key=1ff4f5a771c204dd18912e145d2e13ac')
-  .then(result => res.json(result))
-  .catch(next);
-})
-
-
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   axios.get(`https://api.brewerydb.com/v2/beer/${id}?key=1ff4f5a771c204dd18912e145d2e13ac`)
