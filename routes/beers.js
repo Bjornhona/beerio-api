@@ -3,16 +3,13 @@ const router = express.Router();
 const axios = require('axios');
 const User = require('../models/user');
 
-// For example, some of the endpoints for our database are beers, breweries, events, hops, and locations.
-
 router.get('/', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/beers/?hasLabels&key=1ff4f5a771c204dd18912e145d2e13ac')
+  axios.get('https://api.brewerydb.com/v2/beers/?key=1ff4f5a771c204dd18912e145d2e13ac')
     .then((result) => {
-      // response = result.data.data.filter((item) => {
-        // return item.hasOwnProperty("labels");
-        // return result.data.data
-      // })
-      return res.json(result.data.data)
+      response = result.data.data.filter((item) => {
+        return item.hasOwnProperty("labels");
+      })
+      return res.json(response)
     })
     .catch((error) => {
       next(error);
@@ -79,8 +76,11 @@ router.get('/glassware', (req, res, next) => {
 })
 
 router.get('beers/foodPairings', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/beers/?key=1ff4f5a771c204dd18912e145d2e13ac')
+  axios.get('https://api.brewerydb.com/v2/beers/?foodPairings&key=1ff4f5a771c204dd18912e145d2e13ac')
+  .then(result => res.json(result))
+  .catch(next);
 })
+
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
