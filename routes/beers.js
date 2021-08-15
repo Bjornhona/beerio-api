@@ -4,7 +4,8 @@ const axios = require('axios');
 const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/beers/?hasLabels=Y&key=1ff4f5a771c204dd18912e145d2e13ac')
+  const breweryDbKey = process.env.BREWERYDB_KEY;
+  axios.get(`https://api.brewerydb.com/v2/beers/?hasLabels=Y&key=${breweryDbKey}`)
     .then((result) => res.json(result.data.data))
     .catch((error) => next(error));
 })
