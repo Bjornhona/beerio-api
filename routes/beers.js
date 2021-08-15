@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const User = require('../models/user');
+const breweryDbKey = process.env.BREWERYDB_KEY;
 
 router.get('/', (req, res, next) => {
-  const breweryDbKey = process.env.BREWERYDB_KEY;
   axios.get(`https://api.brewerydb.com/v2/beers/?hasLabels=Y&key=${breweryDbKey}`)
     .then((result) => res.json(result.data.data))
     .catch((error) => next(error));
@@ -14,7 +14,7 @@ router.get('/search/:type/:query', (req, res, next) => {
   const query = req.params.query;
   const type = req.params.type;
 
-  axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=${type}&key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/search?q=${query}&type=${type}&key=${breweryDbKey}`)
     .then(result => {
       let response;
       if (type === "beer") {
@@ -40,7 +40,7 @@ router.get('/favorites', (req, res, next) => {
 })
 
 router.get('/breweries', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/breweries/?withLocations=Y&isInBusiness=Y&key=1ff4f5a771c204dd18912e145d2e13ac')
+  axios.get(`https://api.brewerydb.com/v2/breweries/?withLocations=Y&isInBusiness=Y&key=${breweryDbKey}`)
   .then(result => {
     // const response = result.data.data;
     const response = result.data.data && result.data.data.filter((item) => {
@@ -52,7 +52,7 @@ router.get('/breweries', (req, res, next) => {
 });
 
 router.get('/styles', (req, res, next) => {
-  axios.get(`https://api.brewerydb.com/v2/styles/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/styles/?key=${breweryDbKey}`)
   .then(result => {
     const response = result.data.data && result.data.data;
     return res.json(response);
@@ -61,7 +61,7 @@ router.get('/styles', (req, res, next) => {
 })
 
 router.get('/glassware', (req, res, next) => {
-  axios.get(`https://api.brewerydb.com/v2/glassware?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/glassware?key=${breweryDbKey}`)
   .then(result => {
     const response = result.data.data && result.data.data;
     return res.json(response);
@@ -70,14 +70,14 @@ router.get('/glassware', (req, res, next) => {
 })
 
 router.get('/categories', (req, res, next) => {
-  axios.get('https://api.brewerydb.com/v2/categories?key=1ff4f5a771c204dd18912e145d2e13ac')
+  axios.get(`https://api.brewerydb.com/v2/categories?key=${breweryDbKey}`)
     .then((result) => res.json(result.data.data))
     .catch((error) => next(error));
 })
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
-  axios.get(`https://api.brewerydb.com/v2/beer/${id}?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/beer/${id}?key=${breweryDbKey}`)
     .then((result) => {
       const data = result.data.data;
       return res.status(200).json(data)
@@ -89,7 +89,7 @@ router.get('/:id', (req, res, next) => {
 
 router.get('/brewery/:breweryId', (req, res, next) => {
   const breweryId = req.params.breweryId;
-  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/?key=${breweryDbKey}`)
   .then(result => {
     const data = result.data.data;
     return res.json(data);
@@ -99,7 +99,7 @@ router.get('/brewery/:breweryId', (req, res, next) => {
 
 router.get('/brewery/:breweryId/locations', (req, res, next) => {
   const breweryId = req.params.breweryId;
-  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/locations/?key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/brewery/${breweryId}/locations/?key=${breweryDbKey}`)
   .then(result => {
     const data = result.data.data;
     return res.json(data);
@@ -109,7 +109,7 @@ router.get('/brewery/:breweryId/locations', (req, res, next) => {
 
 router.get('/locations/:zipCode', (req, res, next) => {
   const zipCode = req.params.zipCode;
-  axios.get(`https://api.brewerydb.com/v2/locations/?zip-code=${zipCode}&key=1ff4f5a771c204dd18912e145d2e13ac`)
+  axios.get(`https://api.brewerydb.com/v2/locations/?zip-code=${zipCode}&key=${breweryDbKey}`)
   .then(result => {
     const response = result.data.data;
     return res.json(response);
