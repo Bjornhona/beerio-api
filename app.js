@@ -57,7 +57,7 @@ app.use(session({
   // }
 }));
 
-// app.enable('trust proxy');
+app.enable('trust proxy');
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true})); 
