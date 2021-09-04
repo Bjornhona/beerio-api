@@ -49,21 +49,21 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000,
     sameSite: 'none'
   }
-  // cookie: { 
-  //   httpOnly: true, 
-  //   secure: true, 
-  //   maxAge: 1000 * 60 * 60 * 48, 
-  //   sameSite: 'none' 
-  // }
 }));
-
-app.enable('trust proxy');
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+} else {
+  app.use(express.static(path.join(__dirname, 'public')));
+}
 
 app.use('/auth', auth);
 app.use('/beers', beers);
