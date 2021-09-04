@@ -31,6 +31,7 @@ router.get('/search/:type/:query', (req, res, next) => {
 
 router.get('/favorites', (req, res, next) => {
   const userId = req.session.currentUser._id;
+  console.log(userId);
 
   User.findById(userId)
     .then((user) => {
@@ -42,7 +43,6 @@ router.get('/favorites', (req, res, next) => {
 router.get('/breweries', (req, res, next) => {
   axios.get(`https://api.brewerydb.com/v2/breweries/?withLocations=Y&isInBusiness=Y&key=${breweryDbKey}`)
   .then(result => {
-    // const response = result.data.data;
     const response = result.data.data && result.data.data.filter((item) => {
       return item.hasOwnProperty("images");
     });
