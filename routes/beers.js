@@ -31,7 +31,6 @@ router.get('/search/:type/:query', (req, res, next) => {
 
 router.get('/favorites', (req, res, next) => {
   const userId = req.session.currentUser._id;
-  console.log(userId);
 
   User.findById(userId)
     .then((user) => {
