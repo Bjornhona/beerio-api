@@ -45,16 +45,19 @@ app.use(session({
   secret: 'some-string',
   resave: true,
   saveUninitialized: true,
-  // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // }
-  cookie: { 
-    httpOnly: true, 
-    secure: true, 
-    maxAge: 1000 * 60 * 60 * 48, 
-    sameSite: 'none' 
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'none'
   }
+  // cookie: { 
+  //   httpOnly: true, 
+  //   secure: true, 
+  //   maxAge: 1000 * 60 * 60 * 48, 
+  //   sameSite: 'none' 
+  // }
 }));
+
+// app.enable('trust proxy');
 
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true})); 
