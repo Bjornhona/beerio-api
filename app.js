@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
@@ -16,7 +17,6 @@ const beers = require('./routes/beers');
 mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
-  reconnectTries: Number.MAX_VALUE,
   useUnifiedTopology: true
 }).then(() => {
   console.log(`Connected to database`);
@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/build/favicon.ico'));
 
 app.use(cors({
   credentials: true,
@@ -47,23 +48,14 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
-    sameSite: 'none'
   }
 }));
 
 app.use(logger('dev'));
-app.use(express.urlencoded({extended: true})); 
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "build", "index.html"));
-//   });
-// } else {
-//   app.use(express.static(path.join(__dirname, 'public')));
-// }
 
 app.use('/auth', auth);
 app.use('/beers', beers);
