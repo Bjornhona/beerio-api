@@ -46,8 +46,11 @@ app.use(session({
   secret: 'some-string',
   resave: true,
   saveUninitialized: true,
+  // reconnectTries: Number.MAX_VALUE,
   cookie: {
+    secure: true, 
     maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'none' 
   }
 }));
 
