@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 require('dotenv').config();
@@ -47,19 +46,19 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: {
-    httpOnly: true,
-    secure: true, 
+    // httpOnly: true,
+    // secure: true, 
     maxAge: 24 * 60 * 60 * 1000,
-    sameSite: 'none' 
-  }
+    // sameSite: 'none',
+  },
 }));
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
+// app.set("trust proxy", 1);
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
