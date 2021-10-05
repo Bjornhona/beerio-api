@@ -46,14 +46,14 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: {
-    // httpOnly: true,
-    // secure: true, 
+    httpOnly: true,
+    secure: true, 
     maxAge: 24 * 60 * 60 * 1000,
-    // sameSite: 'none',
+    sameSite: 'none',
   },
 }));
 
-// app.enable('trust proxy');
+app.enable('trust proxy');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
