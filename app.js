@@ -36,16 +36,12 @@ connect();
 //   console.error(error);
 // })
 
-app.get('/', (req, res) => {
-  return res.send({ express: 'Hello From Beerio API!' });
-});
-
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.use(favicon(__dirname + '/build/favicon.ico'));
 
 app.use(cors({
   credentials: true,
-  origin: [process.env.PUBLIC_DOMAIN]
+  origin: process.env.PUBLIC_DOMAIN
 }));
 
 app.use(session({
@@ -113,6 +109,10 @@ app.use((err, req, res, next) => {
   if (!res.headersSent) {
     return res.status(500).json({ code: 'unexpected' });
   }
+});
+
+app.get('/', (req, res) => {
+  return res.send({ express: 'Hello From Beerio API!' });
 });
 
 // app.listen(8080, () => {
