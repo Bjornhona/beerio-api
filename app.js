@@ -39,9 +39,24 @@ connect();
 app.use(favicon(__dirname + '/public/favicon.ico'));
 // app.use(favicon(__dirname + '/build/favicon.ico'));
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002',
+  'http://localhost:3003',
+  process.env.PUBLIC_DOMAIN
+];
+
 app.use(cors({
-  credentials: true,
-  origin: process.env.PUBLIC_DOMAIN
+  // origin: process.env.PUBLIC_DOMAIN,
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 
 app.use(session({
