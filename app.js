@@ -111,6 +111,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  return res.send({ express: 'Hello From Beerio API!' });
+});
+
 app.use('/auth', auth);
 app.use('/beers', beers);
 
@@ -124,10 +128,6 @@ app.use((err, req, res, next) => {
   if (!res.headersSent) {
     return res.status(500).json({ code: 'unexpected' });
   }
-});
-
-app.get('/', (req, res) => {
-  return res.send({ express: 'Hello From Beerio API!' });
 });
 
 // app.listen(8080, () => {
