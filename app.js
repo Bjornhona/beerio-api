@@ -34,6 +34,7 @@ const allowedOrigins = [
   'http://localhost:3002',
   'http://localhost:3003',
   'http://localhost:5173',
+  'http://localhost:4173/',
   process.env.PUBLIC_DOMAIN
 ];
 
