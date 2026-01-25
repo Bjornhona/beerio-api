@@ -40,7 +40,8 @@ router.get('/favorites', (req, res, next) => {
 })
 
 router.get('/breweries', (req, res, next) => {
-  axios.get(`https://api.openbrewerydb.org/v2/breweries/?withLocations=Y&isInBusiness=Y&key=${breweryDbKey}`)
+  // axios.get(`https://api.openbrewerydb.org/v1/breweries/?withLocations=Y&isInBusiness=Y&key=${breweryDbKey}`)
+  axios.get(`https://api.openbrewerydb.org/v1/breweries`)
   .then(result => {
     const response = result.data.data && result.data.data.filter((item) => {
       return item.hasOwnProperty("images");
