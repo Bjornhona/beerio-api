@@ -40,13 +40,9 @@ router.get('/favorites', (req, res, next) => {
 })
 
 router.get('/breweries', (req, res, next) => {
-  // axios.get(`https://api.openbrewerydb.org/v1/breweries/?withLocations=Y&isInBusiness=Y&key=${breweryDbKey}`)
-  axios.get(`https://api.openbrewerydb.org/v1/breweries`)
+  axios.get(`https://api.openbrewerydb.org/v1/breweries?per_page=10`)
   .then(result => {
-    const response = result.data.data && result.data.data.filter((item) => {
-      return item.hasOwnProperty("images");
-    });
-    return res.json(response);
+    return res.json(result.data);
   })
   .catch(next);
 });
@@ -89,10 +85,10 @@ router.get('/:id', (req, res, next) => {
 
 router.get('/brewery/:breweryId', (req, res, next) => {
   const breweryId = req.params.breweryId;
-  axios.get(`https://api.openbrewerydb.org/v2/brewery/${breweryId}/?key=${breweryDbKey}`)
+  axios.get(`https://api.openbrewerydb.org/v1/breweries/${breweryId}`)
   .then(result => {
-    const data = result.data.data;
-    return res.json(data);
+    console.log(result.data);
+    return res.json(result.data);
   })
   .catch(next);
 });
