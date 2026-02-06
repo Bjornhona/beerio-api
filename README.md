@@ -19,6 +19,14 @@ A RESTful API backend for beer discovery and tracking, built with Express and Mo
 - **Auth:** bcrypt, express-session
 - **External API:** [Open Brewery DB](https://www.openbrewerydb.org/documentation/01-getting-started)
 
+## Live API
+
+The API is deployed on [Render](https://render.com/) with automatic deployments from GitHub — every push to the main branch triggers a new build and deploy.
+
+**Base URL:** [https://beerio-api.onrender.com](https://beerio-api.onrender.com)
+
+Try it: [https://beerio-api.onrender.com](https://beerio-api.onrender.com) returns a health check response.
+
 ## Getting Started
 
 ### Prerequisites
