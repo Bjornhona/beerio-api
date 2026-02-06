@@ -30,7 +30,7 @@ A RESTful API backend for beer discovery and tracking, built with Express and Mo
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/beerio-api.git
+git clone https://github.com/Bjornhona/beerio-api.git
 cd beerio-api
 npm install
 ```
@@ -43,15 +43,14 @@ Create a `.env` file in the project root with:
 MONGODB_URI=mongodb://localhost:27017/beeriodb
 BREWERYDB_KEY=your_openbrewerydb_api_key
 PUBLIC_DOMAIN=http://localhost:3000
-PORT=8080
 ```
 
-| Variable       | Description                                          |
-|----------------|------------------------------------------------------|
-| `MONGODB_URI`  | MongoDB connection string                            |
-| `BREWERYDB_KEY`| API key from [Open Brewery DB](https://www.openbrewerydb.org/documentation/01-getting-started) |
-| `PUBLIC_DOMAIN`| Allowed origin for CORS (your frontend URL)          |
-| `PORT`         | Server port (default: 8080)                          |
+| Variable              | Description                                          |
+|-----------------------|------------------------------------------------------|
+| `MONGODB_URI`         | MongoDB connection string                            |
+| `BREWERYDB_KEY`       | API key from [Open Brewery DB](https://www.openbrewerydb.org/documentation/01-getting-started) |
+| `PUBLIC_DOMAIN`       | Allowed origin for CORS (your frontend URL)          |
+| `GENERATE_SOURCEMAP`  | Server port (default: 8080)                          |
 
 ### Run
 
